@@ -53,7 +53,7 @@ defineProps({
     flex-direction: column;
     align-items: center;
     img {
-      width: 363px;
+      width: 320px;
       height: 20vh;
       border-radius: 2vh;
     }
