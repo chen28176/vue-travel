@@ -1,21 +1,27 @@
 /*
- * @Author: '陈28176' 'chen28176@qq.com'
- * @Date: 2023-02-26 22:28:38
- * @LastEditors: '陈28176' 'chen28176@qq.com'
- * @LastEditTime: 2023-02-26 22:43:01
- * @Description: 
+ * @Description: 收藏页数据处理
+ * @Author: 86
+ * @Date: 2023-04-17 18:12:41
+ * @LastEditTime: 2023-04-17 21:08:58
+ * @LastEditors: 86 10976595+chenruiho@user.noreply.gitee.com
+ * @FilePath: \hy-trip\src\stores\modules\favor.js
  */
-import { defineStore } from 'pinia'
-import { getFavor } from '@/services'
 
+import { defineStore } from 'pinia';
+import { getFavorList } from '@/services';
 
-
-export const useFavorStore = defineStore('favor', {
-  actions: {
-    async getFavorData() {
-      const res = await getFavor()
-      this.favorList = res.data.data.items
+const favorStoreOptions = {
+    state: () => ({
+        hotFavorList: [],//存储收藏数据
+    }),
+    actions: {
+        async fetchHotFavorList() {
+            const res = await getFavorList()
+            this.hotFavorList = res.data.data
+        },
     }
-  },
-  getters: {}
-})
+}
+
+const useFavorStore = defineStore('favor', favorStoreOptions)
+
+export default useFavorStore
