@@ -64,7 +64,8 @@ defineProps({
       text-align: center;
       border-radius: 10px;
       color: #000;
-      margin-top: 20px;
+      margin-top: 10px;
+      margin-bottom: 10px;
       align-items: flex-start;
       font-weight: bold;
       background: #e8e8e8;
