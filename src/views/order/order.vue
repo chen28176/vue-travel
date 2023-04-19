@@ -1,42 +1,52 @@
 <!--
- * @Author: '陈28176' 'chen28176@qq.com'
- * @Date: 2023-02-23 22:10:10
- * @LastEditors: '陈28176' 'chen28176@qq.com'
- * @LastEditTime: 2023-03-06 22:27:02
- * @Description: 
+ * @Description: 订单详情
+ * @Author: 86
+ * @Date: 2023-02-04 21:47:40
+ * @LastEditTime: 2023-04-19 19:41:34
+ * @LastEditors: Please set LastEditors
+ * @FilePath: \hy-trip\src\views\order\order.vue
 -->
 <template>
   <div class="order">
-    <van-nav-bar title="订单列表" left-text="返回" left-arrow @click-left="onClickLeft"></van-nav-bar>
-    <van-card num="2" price="2.00" desc="描述信息" title="商品标题" thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
-      v-for="index in 6">
-      <template #tags>
-        <van-tag plain type="primary">标签</van-tag>
-        <van-tag plain type="primary">标签</van-tag>
-      </template>
-      <template #footer>
-        <van-button size="mini">-</van-button>
-        <van-button size="mini">+</van-button>
-      </template>
-    </van-card>
-    <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit">
-      <van-checkbox v-model="checked">全选</van-checkbox>
-      <template #tip>
-        你的收货地址不支持配送, <span @click="onClickLink">修改地址</span>
-      </template>
-    </van-submit-bar>
-
+    <!-- 导航栏 -->
+    <van-nav-bar title="订单" />
+    <!-- 内容 -->
+    <div class="content">
+    <van-swipe-cell class="content-order" v-for="(item,index) in hotOrderList.orders" :key="index">
+        <van-card :num="item.cityTerritoryType" :price="item.prepayAmount" :desc="item.hotelName" :title="item.unitName"
+          :thumb="item.unitPicture">
+          <template #tags>
+            <van-tag plain type="primary">{{item.cityName}}</van-tag>
+            <van-tag plain type="primary">{{item.orderStatusDesc}}</van-tag>
+          </template>
+        </van-card>
+        <template #right>
+          <van-button square text="删除" type="danger" class="delete-button" />
+        </template>
+      </van-swipe-cell>
+    </div>
   </div>
-
-  <van-submit-bar :price="0" button-text="提交订单" @submit="onSubmit" />
 </template>
 
 <script setup>
-  import router from '@/router';
+import useOrderStore from '@/stores/modules/order';
+import { storeToRefs } from 'pinia';
 
-  const onClickLeft = () =>{
-    router.go(-1)
-  }
+// 发送请求
+const OrderStore = useOrderStore()
+// 获取订单商品
+OrderStore.fetchHotOrderList()
+// 结构数据
+const { hotOrderList } = storeToRefs(OrderStore)
+
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.delete-button {
+  height: 100%;
+}
+
+.content-order {
+  margin-bottom: 10px;
+}
+</style>
