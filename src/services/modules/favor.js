@@ -1,15 +1,15 @@
 /*
- * @Author: '陈28176' 'chen28176@qq.com'
- * @Date: 2023-02-26 22:27:02
- * @LastEditors: '陈28176' 'chen28176@qq.com'
- * @LastEditTime: 2023-02-26 22:38:03
  * @Description: 
+ * @Author: 86
+ * @Date: 2023-04-17 18:09:02
+ * @LastEditTime: 2023-04-19 19:46:58
+ * @LastEditors: Please set LastEditors
+ * @FilePath: \hy-trip\src\services\modules\favor.js
  */
-import hyRequest from "../request"
-
-export function getFavor(){
+import hyRequest from "../request/index";
+// 获取收藏数据
+export function getFavorList() {
     return hyRequest.get({
-    url: '/favor/list'
+        url: '/favor/list'
     })
-} 
-
+}

@@ -57,17 +57,15 @@ defineProps({
       height: 20vh;
       border-radius: 2vh;
     }
-    .info {
+     .info {
       width: 80px;
-      margin-left: 10px;
+      padding: 5px;
       font-size: 10px;
       text-align: center;
-      padding: 5px;
-      position: relative;
-      bottom: 170px;
-      right: 130px;
       border-radius: 10px;
       color: #000;
+      margin-top: 20px;
+      align-items: flex-start;
       font-weight: bold;
       background: #e8e8e8;
     }
