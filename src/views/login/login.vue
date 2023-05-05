@@ -1,13 +1,13 @@
 <!--
  * @Author: '陈28176' 'chen28176@qq.com'
  * @Date: 2023-03-06 22:48:52
- * @LastEditors: '陈28176' 'chen28176@qq.com'
- * @LastEditTime: 2023-03-06 23:10:28
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-05-06 00:06:32
  * @Description: 
 -->
 <template>
     <div class="login">
-        <van-form @submit="onSubmit">
+        <van-form>
             <h1>请登录</h1>
             <van-notice-bar left-icon="volume-o" :scrollable="false">
                 <van-swipe vertical class="notice-swipe" :autoplay="3000" :touchable="false" :show-indicators="false">
@@ -18,13 +18,13 @@
             </van-notice-bar>
             <van-divider />
             <van-cell-group inset>
-                <van-field v-model="username" name="用户名" label="用户名" placeholder="用户名"
+                <van-field v-model="loginForm.username" name="用户名" label="用户名" placeholder="admin"
                     :rules="[{ required: true, message: '请填写用户名' }]" />
-                <van-field v-model="password" type="password" name="密码" label="密码" placeholder="密码"
+                <van-field v-model="loginForm.password" type="password" name="密码" label="密码" placeholder="123456"
                     :rules="[{ required: true, message: '请填写密码' }]" />
             </van-cell-group>
             <div style="margin: 16px;">
-                <van-button round block type="primary" native-type="submit" >
+                <van-button round block type="primary" native-type="submit" @click.prevent="handleSubmit">
                     提交
                 </van-button>
             </div>
@@ -34,15 +34,35 @@
 
 <script setup>
 import router from '@/router';
+import axios from 'axios';
 import { ref } from 'vue';
+import { Toast  } from 'vant'// 按需导入
+import 'vant/lib/index.css';
 
-const username = ref('123');
-const password = ref('123123');
-const onSubmit = (values) => {
-    router.push('/home')
-};
+const loginForm = ref(
+    {
+      username: '',
+      password: ''
+    }
+)
 
-
+const handleSubmit= () =>  {
+    axios.post('/api/login', loginForm.value)
+        .then(response => {
+            if (response.data.code === 200) {
+                // 登录成功，保存token到本地存储
+                localStorage.setItem('token', response.data.data.token)
+                // 跳转到首页
+                router.push('/home')
+            } else {
+                // 登录失败，显示错误提示
+                Toast.fail(response.data.message)// 失败提示
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
 </script>
 
 <style lang="less" scoped>

@@ -1,9 +1,9 @@
 /*
  * @Author: '陈28176' 'chen28176@qq.com'
  * @Date: 2023-02-23 22:10:10
- * @LastEditors: '陈28176' 'chen28176@qq.com'
- * @LastEditTime: 2023-03-07 16:20:38
- * @Description: 
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-05-05 22:41:57
+ * @Description: 路由页
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
 
@@ -59,5 +59,14 @@ const router = createRouter({
     },
   ]
 })
+
+// // 路由前置守卫
+// router.beforeEach((to,from,next) => {
+
+// })
+// // 路由后置守卫
+// router.afterEach((to) => {
+  
+// })
 
 export default router
