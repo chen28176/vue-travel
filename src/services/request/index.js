@@ -1,3 +1,9 @@
+/*
+ * @Description: 网络配置
+ * @Author: 86
+ * @Date: 2023-02-23 22:10:10
+ * @LastEditTime: 2023-05-08 00:44:40
+ */
 import axios from 'axios'
 import { BASE_URL, TIMEOUT } from './config'
 import useMainStore from '@/stores/modules/main'
@@ -36,7 +42,6 @@ class HYRequest {
     get(config) {
         return this.request({ ...config, method: 'get' })
     }
-
     post(config) {
         return this.request({ ...config, method: 'post' })
     }
